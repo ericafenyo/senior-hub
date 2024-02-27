@@ -94,3 +94,24 @@ Page: Emergency Contacts
 
 - Contact information validation (name, phone number, relationship).
 - Real-time reflection of changes in the contact list.
+
+**Checklist:**
+
+- [ ] Register User
+
+  - Actors fill in the form with valid information.
+  - Inputs meet validation rules.
+  - Pressing the registration button initiates the registration process.
+  - Successful registration results in a generated user response with ID and authentication.
+
+- [ ] Verify Account
+
+  - Input validation for any modification and additional information.
+  - Profile picture upload functionality.
+  - Real-time updating of profile information.
+  - [ ] Manage Profile Information
+
+- [ ] Manage Emergency Contacts
+
+  - Contact information validation (name, phone number, relationship).
+  - Real-time reflection of changes in the contact list.

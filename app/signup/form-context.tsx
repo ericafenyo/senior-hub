@@ -66,9 +66,7 @@ export const FormProvider = ({ children }: Props) => {
   };
 
   return (
-    <FormContext.Provider
-      value={{ onContinue, onPrevious, step, formValues, setFormValues }}
-    >
+    <FormContext.Provider value={{ onContinue, onPrevious, step, formValues, setFormValues }}>
       {children}
     </FormContext.Provider>
   );

@@ -1,9 +1,12 @@
+
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/widgets/navbar";
 import Footer from "@/components/widgets/footer";
+import { SessionProvider } from "./auth/session-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="relative flex flex-col bg-background">
-          <Navbar />
-          <main className="flex-1 min-h-screen">{children}</main>
-          <Footer />
-        </div>
+        <SessionProvider>
+          <div className="relative flex flex-col bg-background">
+            <Navbar />
+            <main className="flex-1 min-h-screen">{children}</main>
+            <Footer />
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -7,6 +7,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { AuthStatus, UserRole, useSessionContext } from "../auth/session-context";
+import { jwtDecode } from "jwt-decode";
 
 import { Accounts } from "@senior-hub/network";
 
@@ -25,11 +27,28 @@ const Login = () => {
 
   const router = useRouter();
 
+  const session = useSessionContext();
+
   const submit: SubmitHandler<FormValues> = async (values: FormValues) => {
     const result = await Accounts.authenticate(values);
     if (result.succeeded) {
       const token = result.data?.accessToken;
       localStorage.setItem("access-token", token!);
+
+      const decoded = jwtDecode(token!);
+      const userId = decoded.sub ? decoded.sub.split("|")[1] : "";
+
+      session.setStatus(AuthStatus.AUTHENTICATED);
+      session.setUser({
+        id: userId,
+        role: UserRole.CARETAKER,
+      });
+
+      session.setTokens({
+        accessToken: token!,
+        refreshToken: "",
+        expiresAt: decoded.exp,
+      });
 
       router.push("/caretaker");
     }

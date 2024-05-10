@@ -4,11 +4,13 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { Accounts } from "@senior-hub/network";
+import { USER_SESSION_KEY } from "../constants";
+import { Claims, extract } from "../util/jwts";
+import { AuthStatus, Session } from "../types";
 
 export const authenticate = async (formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(email, password);
 
   const request = {
     email: email as string,
@@ -17,9 +19,21 @@ export const authenticate = async (formData: FormData) => {
 
   const tokens = await Accounts.authenticate(request);
 
-  console.log(tokens);
+  const claims = extract(tokens.accessToken);
 
-  cookies().set("session", JSON.stringify(tokens), { httpOnly: true });
+  const session: Session = sessionFromClaims(claims, tokens.accessToken);
 
-  redirect("/caretaker");
+  cookies().set(USER_SESSION_KEY, JSON.stringify(session), { httpOnly: true });
+
+  redirect(`/${session.role}`);
 };
+
+function sessionFromClaims(claims: Claims, accessToken: string) {
+  return {
+    subject: claims.sub,
+    role: claims.role.slug,
+    status: AuthStatus.AUTHENTICATED,
+    authToken: accessToken,
+    expiresAt: new Date(claims.exp * 1000),
+  };
+}

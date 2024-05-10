@@ -20,11 +20,11 @@ const LoginPage = () => {
             <form action={authenticate} className="space-y-6">
               <div className="space-y-2 w-full">
                 <Label htmlFor="email">Email</Label>
-                <Input name="email" autoComplete="off" placeholder="" />
+                <Input name="email" autoComplete="off" placeholder="" value="mary.smith@yopmail.com" />
               </div>
               <div className="space-y-2 w-full">
                 <Label htmlFor="password">Password</Label>
-                <Input name="password" autoComplete="off" placeholder="" />
+                <Input name="password" autoComplete="off" placeholder="" value="Passw0rd" />
               </div>
 
               <div>

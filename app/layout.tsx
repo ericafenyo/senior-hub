@@ -27,7 +27,7 @@ export default function RootLayout({
         <SessionProvider>
           <div className="relative flex flex-col bg-background">
             <Navbar />
-            <main className="flex-1 min-h-screen">{children}</main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </SessionProvider>

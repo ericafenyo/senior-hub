@@ -6,7 +6,7 @@ import { PackageOpen } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <header className="absolute top-0 z-50 w-full bg-background border-b border-border/40 ">
+    <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
       <div className="container flex items-center h-14">
         <div>
           <Link href="/" className="flex  items-center space-x-2 mr-6">

@@ -1,12 +1,22 @@
-
-// import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+import { isAuthenticated, invalidate } from "./app/auth/actions";
 
-  // return NextResponse.redirect(new URL("/home", request.url));
+export async function middleware(request: NextRequest) {
+  const isAuth = await isAuthenticated();
+
+  if (!isAuth) {
+    await invalidate();
+    return NextResponse.redirect("/login");
+  }
+  return NextResponse.next();
 }
 
-// export const config = {
-//   matcher: "/home:path*",
-// };
+export const config = {
+  matcher: [
+    "/senior/:path",
+    "/caretaker/:path",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
+};

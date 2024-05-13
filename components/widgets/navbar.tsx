@@ -4,6 +4,20 @@ import { Button } from "../ui/button";
 
 import { PackageOpen } from "lucide-react";
 
+const AuthenticationActions = () => {
+  return (
+    <div className=" flex justify-end flex-1 space-x-2">
+      <Button variant="outline" className="h-9">
+        <Link href="/login">Login</Link>
+      </Button>
+
+      <Button className="h-9">
+        <Link href="/signup">Sign up</Link>
+      </Button>
+    </div>
+  );
+};
+
 const Navbar = () => {
   return (
     <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
@@ -14,15 +28,9 @@ const Navbar = () => {
             <span className="hidden font-bold sm:inline-block">Senior hub</span>
           </Link>
         </div>
-        <div className=" flex justify-end flex-1 space-x-2">
-          <Button variant="outline" className="h-9">
-            <Link href="/login">Login</Link>
-          </Button>
-
-          <Button className="h-9">
-            <Link href="/signup">Sign up</Link>
-          </Button>
-        </div>
+        <>
+          <AuthenticationActions />
+        </>
       </div>
     </header>
   );

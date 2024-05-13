@@ -19,7 +19,7 @@ export type User = {
   email: string;
   photoUrl: string;
   role: string;
-  address: string;
+  address: Address;
   createdAt: string;
   updatedAt: string;
 };

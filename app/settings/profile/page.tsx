@@ -1,15 +1,17 @@
+"use server";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
 
 import { updateProfile } from "./actions";
-import { Users } from "@/packages/network";
 import { retrieveSection } from "@/app/auth/actions";
+import { findById } from "@senior-hub/network/users";
 
 async function Profile() {
-  const session = await retrieveSection()
-//   const user = await Users.findById();
+  const session = await retrieveSection();  
+
+  const user = await findById(session.id);
 
   return (
     <div>
@@ -19,37 +21,37 @@ async function Profile() {
           <h1>Personal Information</h1>
         </div>
         <div>
-          <Input type="hidden" name="id" value="736P89347089937" />
+          <Input type="hidden" name="id" defaultValue={user.id} />
         </div>
         <div>
           <Label htmlFor="name">First Name</Label>
-          <Input type="text" name="firstName" value="Mary" />
+          <Input type="text" name="firstName" defaultValue={user.firstName} />
         </div>
 
         <div>
           <Label htmlFor="lastName">Last Name</Label>
-          <Input type="text" name="lastName" value="Smith" />
+          <Input type="text" name="lastName" defaultValue={user.lastName} />
         </div>
 
         {/* Address */}
         <div>
-          <Label htmlFor="address">ema</Label>
-          <Input type="text" name="address" value="9 Rue Marguerite de Rochechouart" />
+          <Label htmlFor="street">ema</Label>
+          <Input type="text" name="street" defaultValue={user.address.street} />
         </div>
 
         <div>
           <Label htmlFor="city">City</Label>
-          <Input type="text" name="city" value="Paris" />
+          <Input type="text" name="city" defaultValue={user.address.city} />
         </div>
 
         <div>
           <Label htmlFor="postalCode">Postal Code</Label>
-          <Input type="text" name="postalCode" value="75009" />
+          <Input type="text" name="postalCode" defaultValue={user.address.postalCode} />
         </div>
 
         <div>
           <Label htmlFor="country">Country</Label>
-          <Input type="text" name="country" value="France" />
+          <Input type="text" name="country" defaultValue={user.address.country} disabled />
         </div>
         <div>
           <Button type="submit">Update</Button>

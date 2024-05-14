@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { Accounts } from "@senior-hub/network";
 import { USER_SESSION_KEY } from "../constants";
 import { Claims, extract } from "../util/jwts";
-import { AuthStatus, Session } from "../types";
+import { Session } from "../types";
 
 export const authenticate = async (formData: FormData) => {
   const email = formData.get("email");
@@ -28,12 +28,13 @@ export const authenticate = async (formData: FormData) => {
   redirect(`/${session.role}`);
 };
 
-function sessionFromClaims(claims: Claims, accessToken: string) {
+function sessionFromClaims(claims: Claims, token: string): Session {
+  const id = claims.sub.split("|")[1];
+
   return {
-    subject: claims.sub,
+    id: id,
     role: claims.role.slug,
-    status: AuthStatus.AUTHENTICATED,
-    authToken: accessToken,
+    token: token,
     expiresAt: new Date(claims.exp * 1000),
   };
 }

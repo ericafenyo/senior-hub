@@ -5,11 +5,11 @@ import { cookies } from "next/headers";
 import { USER_SESSION_KEY } from "../constants";
 import { Session } from "../types";
 
-export const retrieveSection = async (): Promise<Session | null> => {
+export const retrieveSection = async (): Promise<Session> => {
   const value = cookies().get(USER_SESSION_KEY)?.value || "";
 
   if (!value) {
-    return null;
+    throw new Error("Session not found");
   }
 
   return JSON.parse(value);

@@ -1,6 +1,5 @@
 export type Tokens = {
   accessToken: string;
-  refreshToken: string;
 };
 
 export type Address = {
@@ -22,4 +21,13 @@ export type User = {
   address: Address;
   createdAt: string;
   updatedAt: string;
+};
+
+export class HttpException extends Error {
+  status?: number;
+  code?: string;
+}
+
+export type Session = {
+  token: string;
 };

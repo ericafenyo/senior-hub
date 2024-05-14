@@ -17,6 +17,7 @@ export const config = {
   matcher: [
     "/senior/:path",
     "/caretaker/:path",
+    "/settings/:path*",
     "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

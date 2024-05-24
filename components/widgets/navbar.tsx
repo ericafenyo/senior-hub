@@ -1,8 +1,18 @@
 import Link from "next/link";
 
-import { Button } from "../ui/button";
+import {Button} from "../ui/button";
 
-import { PackageOpen } from "lucide-react";
+import {PackageOpen} from "lucide-react";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const AuthenticationActions = () => {
   return (
@@ -24,12 +34,29 @@ const Navbar = () => {
       <div className="container flex items-center h-14">
         <div>
           <Link href="/" className="flex  items-center space-x-2 mr-6">
-            <PackageOpen className="h-6 w-6" />
+            <PackageOpen className="h-6 w-6"/>
             <span className="hidden font-bold sm:inline-block">Senior hub</span>
           </Link>
         </div>
+
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a fruit"/>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Teams</SelectLabel>
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
         <>
-          <AuthenticationActions />
+          <AuthenticationActions/>
         </>
       </div>
     </header>

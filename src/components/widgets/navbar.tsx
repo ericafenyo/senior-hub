@@ -22,7 +22,7 @@ const AuthenticationActions = () => {
       </Button>
 
       <Button className="h-9">
-        <Link href="/signup">Sign up</Link>
+        <Link href="/sign-up">Sign up</Link>
       </Button>
     </div>
   );

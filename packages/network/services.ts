@@ -1,6 +1,6 @@
 "use service";
 
-import { USER_SESSION_KEY } from "@/app/constants";
+import { USER_SESSION_KEY } from "@/src/app/constants";
 import { cookies } from "next/headers";
 
 export const findOne = async (id: string) => {

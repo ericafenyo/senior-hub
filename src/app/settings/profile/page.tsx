@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { updateProfile } from "./actions";
-import { retrieveSection } from "@/app/auth/actions";
+import { retrieveSection } from "@/src/core/auth/actions";
 import { findById } from "@senior-hub/network/users";
 
 async function Profile() {

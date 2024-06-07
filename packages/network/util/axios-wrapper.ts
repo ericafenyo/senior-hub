@@ -1,6 +1,6 @@
 "use server";
 
-import { USER_SESSION_KEY } from "@/app/constants";
+import { USER_SESSION_KEY } from "@/src/app/constants";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 import { cookies } from "next/headers";

@@ -1,4 +1,5 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
+import Tasks from "../tasks";
 
 
 const Page = () => {
@@ -19,7 +20,7 @@ const Page = () => {
             </TabsList>
             <TabsContent value="reminders">Check appointments here</TabsContent>
             <TabsContent value="medications">Track medications taken</TabsContent>
-            <TabsContent value="tasks">Add a little todos</TabsContent>
+            <TabsContent value="tasks"><Tasks/></TabsContent>
             <TabsContent value="notes">Record some important notes</TabsContent>
             <TabsContent value="members">Manages the members of this team</TabsContent>
           </Tabs>

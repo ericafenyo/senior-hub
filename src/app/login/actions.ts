@@ -1,12 +1,9 @@
 "use server";
 
-import {redirect} from "next/navigation";
-import {cookies} from "next/headers";
+import { redirect } from "next/navigation";
 
-import {Accounts} from "@senior-hub/network";
-import {USER_SESSION_KEY} from "../constants";
-import {Claims, extract} from "../util/jwts";
-import {Session} from "../types";
+import { Accounts } from "@senior-hub/network";
+import { setAuthentication } from "@/core/auth";
 
 export const authenticate = async (formData: FormData) => {
   const email = formData.get("email");
@@ -19,22 +16,7 @@ export const authenticate = async (formData: FormData) => {
 
   const tokens = await Accounts.authenticate(request);
 
-  const claims = extract(tokens.accessToken);
+  setAuthentication(tokens.accessToken);
 
-  const session: Session = sessionFromClaims(claims, tokens.accessToken);
-
-  cookies().set(USER_SESSION_KEY, JSON.stringify(session), {httpOnly: true});
-
-  redirect(`/teams`);
+  redirect("/");
 };
-
-function sessionFromClaims(claims: Claims, token: string): Session {
-  const id = claims.sub.split("|")[1];
-
-  return {
-    id: id,
-    role: claims.role.slug,
-    token: token,
-    expiresAt: new Date(claims.exp * 1000),
-  };
-}

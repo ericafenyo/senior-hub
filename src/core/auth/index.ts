@@ -35,5 +35,5 @@ export const isAuthenticated = async (): Promise<boolean> => {
   if (!authentication.token) {
     return false;
   }
-  return isExpired(authentication.token);
+  return !isExpired(authentication.token);
 };

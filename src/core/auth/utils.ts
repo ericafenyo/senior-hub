@@ -1,3 +1,8 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+
 export type Role = {
   id: string;
   name: string;
@@ -28,5 +33,14 @@ export const extract = (token: string): Claims => {
 
 export const isExpired = (token: string) => {
   const claims = extract(token);
-  return new Date(claims.exp * 1000) < new Date();
+
+  const currentTime = dayjs().utc();
+
+  const expirationTime = dayjs.utc(claims.exp * 1000);
+
+  console.log("currentTime", currentTime.toISOString());
+  console.log("expirationTime", expirationTime.toISOString());
+  console.log("isAfter", currentTime.isAfter(expirationTime));
+
+  return currentTime.isAfter(expirationTime);
 };

@@ -1,8 +1,6 @@
 "use server";
 
-import { findById, updateUser } from "@/packages/network/users";
-
-// import { Users } from "@/packages/network";
+import { findById, updateUser } from "@senior-hub/network/users";
 
 export const updateProfile = async (formData: FormData) => {
   const id = formData.get("id");

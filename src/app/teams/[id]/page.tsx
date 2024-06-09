@@ -1,8 +1,14 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import Tasks from "../tasks";
 
+export type Props = {
+  params: any;
+}
 
-const Page = () => {
+const Page = ({params: {id}}: Props) => {
+
+  console.log(id)
+
   return (
     <section>
       <div className="container">

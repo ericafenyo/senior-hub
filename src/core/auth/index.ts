@@ -23,6 +23,11 @@ export const getAuthentication = async (): Promise<Authentication> => {
   return {token: entries.token, status: entries.status};
 };
 
+export const getToken = async (): Promise<string> => {
+  const authentication = await getAuthentication();
+  return authentication.token || "";
+}
+
 export const setAuthentication = async (token: string) => {
   cookies().set(AUTH_SESSION_KEY, JSON.stringify({token, status: "connected"}), {
     httpOnly: true,

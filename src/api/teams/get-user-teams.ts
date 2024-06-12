@@ -1,6 +1,6 @@
 'use server';
 
-import {http} from "../http-client";
+import {http} from "../client";
 import {getToken} from "@/core/auth"
 import {Team} from "@/types";
 

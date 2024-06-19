@@ -11,4 +11,4 @@ established policies.
 - Ensures security, compliance, and policy enforcement across the entire system.
 
 ### Persona
-[Sophie Dubois](../personas/sophie-dubois/bio.md)
+[Sophie Dubois](../personas/sophie-dubois)

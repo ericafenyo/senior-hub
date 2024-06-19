@@ -10,6 +10,6 @@ ensuring overall operational efficiency.
 * Manages the overall operation of the team.
 * Invites and manages users within the system.
 
-## Persona
+## Personas
 
 [Sophie Dubois](../personas/sophie-dubois.md)

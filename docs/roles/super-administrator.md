@@ -4,11 +4,11 @@ This role has access to all the features and functionalities of the system, over
 operations. The super administrator ensures that the entire system runs smoothly, securely, and in compliance with
 established policies.
 
-### Responsibilities
+## Responsibilities
 
 - Oversees user management, system configurations, and operational efficiency.
 - Can create, modify, or delete care teams and their administrators (Admins).
 - Ensures security, compliance, and policy enforcement across the entire system.
 
-### Persona
-[Sophie Dubois](../personas/sophie-dubois)
+## Personas
+[Sophie Dubois](../personas/sophie-dubois.md)

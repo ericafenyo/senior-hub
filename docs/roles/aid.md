@@ -1,6 +1,6 @@
 # Aid role
 
-## Description
+### Description
 
 Directly supports seniors by assisting with their daily needs, following care plans, and maintaining a supportive and
 safe environment.
@@ -12,5 +12,6 @@ safe environment.
 - Reports observations and concerns to the Coordinator or Consultant.
 - Ensures the comfort and safety of seniors.
 
-### Persona
+### Personas
 
+[Maria Rodriguez](../personas/maria-rodriguez.md)

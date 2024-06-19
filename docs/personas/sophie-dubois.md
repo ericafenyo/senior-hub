@@ -31,7 +31,7 @@
 ## Information
 
 ```json
-   {
+{
   "firstName": "Sophie",
   "lastName": "Dubois",
   "email": "sophie.dubois@example.fr",

@@ -3,7 +3,7 @@
 ## Actors:
 
 - [Senior User](../personas/senior-user.md)
-- [Caretaker](../personas/caretaker.md)
+- [Caretaker](../personas/maria-rodriguez)
 - [Activity Coordinator](../personas/activity-coordinator.md)
 
 ## User Story:

@@ -36,8 +36,8 @@
   "password": "jxPBx1F8iK6ZleoW",
   "birthdate": "1994-08-15",
   "address": {
-    "street": "15 Rue de la République",
-    "postalCode": "69002",
+    "street": "15 Quai Jean Moulin",
+    "postalCode": "69001",
     "city": "Lyon",
     "country": "France"
   }

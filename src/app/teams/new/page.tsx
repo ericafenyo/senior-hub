@@ -1,10 +1,10 @@
-'use server';
+"use server";
 
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import {createTeam} from "@/api/teams";
-import SubmitButton from "@/app/teams/new/submit-button";
+import { createTeam } from "@/api/teams";
+import SubmitButton from "@/components/submit-button";
 
 const CreateTeam = async () => {
   return (
@@ -17,16 +17,15 @@ const CreateTeam = async () => {
             <form action={createTeam} className="space-y-4">
               <div>
                 <Label>Name</Label>
-                <Input name="name"/>
+                <Input name="name" />
               </div>
 
               <div>
                 <Label>Description</Label>
-                <Input name="description"/>
+                <Input name="description" />
               </div>
-
               <div>
-                <SubmitButton/>
+                <SubmitButton className="w-full">Create team</SubmitButton>
               </div>
             </form>
           </div>

@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const PersonalInformationForm = () => {
   const { setFormValues, formValues, onContinue } = userFormContext();
+
   const {
     register,
     handleSubmit,

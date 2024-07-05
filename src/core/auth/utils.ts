@@ -38,9 +38,5 @@ export const isExpired = (token: string) => {
 
   const expirationTime = dayjs.utc(claims.exp * 1000);
 
-  console.log("currentTime", currentTime.toISOString());
-  console.log("expirationTime", expirationTime.toISOString());
-  console.log("isAfter", currentTime.isAfter(expirationTime));
-
   return currentTime.isAfter(expirationTime);
 };

@@ -1,12 +1,12 @@
-import {cookies} from "next/headers";
-
-import {isExpired, extract} from "./utils";
+import { cookies } from "next/headers";
+import { isExpired, extract } from "./utils";
 
 const AUTH_SESSION_KEY = "SENIOR_HUB_AUTH_SESSION";
 
 export type Authentication = {
   token: string | null;
   status: "idle" | "connected" | "disconnected";
+  isAuthenticated: boolean;
 };
 
 export const getAuthentication = async (): Promise<Authentication> => {
@@ -16,21 +16,26 @@ export const getAuthentication = async (): Promise<Authentication> => {
     return {
       token: null,
       status: "idle",
+      isAuthenticated: false
     };
   }
 
   const entries = JSON.parse(value);
-  return {token: entries.token, status: entries.status};
+  return {
+    token: entries.token,
+    status: entries.status,
+    isAuthenticated: entries.token && !isExpired(entries.token)
+  };
 };
 
 export const getToken = async (): Promise<string> => {
   const authentication = await getAuthentication();
   return authentication.token || "";
-}
+};
 
 export const setAuthentication = async (token: string) => {
-  cookies().set(AUTH_SESSION_KEY, JSON.stringify({token, status: "connected"}), {
-    httpOnly: true,
+  cookies().set(AUTH_SESSION_KEY, JSON.stringify({ token, status: "connected" }), {
+    httpOnly: true
   });
 };
 
@@ -51,4 +56,4 @@ export const getUserId = async (): Promise<string> => {
 
   const sub = extract(authentication.token).sub;
   return sub.split("|")[1] || "";
-}
+};

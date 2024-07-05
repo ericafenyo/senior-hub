@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import {Button} from "../ui/button";
+import {Button} from "./ui/button";
 
 import {PackageOpen} from "lucide-react";
 
@@ -33,7 +33,7 @@ const Navbar = () => {
     <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
       <div className="container flex items-center h-14">
         <div>
-          <Link href="/" className="flex  items-center space-x-2 mr-6">
+          <Link href="/public" className="flex  items-center space-x-2 mr-6">
             <PackageOpen className="h-6 w-6"/>
             <span className="hidden font-bold sm:inline-block">Senior hub</span>
           </Link>

@@ -6,7 +6,7 @@ import { getAuthentication } from "@/core/auth";
 
 const AuthenticationActions = () => {
   return (
-    <div className=" flex justify-end flex-1 space-x-2">
+    <div className=" flex justify-end gap-2">
       <Button variant="outline" className="h-9">
         <Link href={"/login"}>Login</Link>
       </Button>
@@ -24,9 +24,9 @@ const Navbar = async () => {
   return (
     <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
       <div className="container">
-        <div className="flex items-center space-x-4 h-14">
-          <div>
-            <Link href="/public" className="flex  items-center space-x-2 mr-6">
+        <div className="flex items-center gap-4 h-14">
+          <div className="">
+            <Link href="/public" className="flexitems-center gap-2 mr-6">
               <PackageOpen className="h-6 w-6" />
               <span className="hidden font-bold sm:inline-block">Senior hub</span>
             </Link>

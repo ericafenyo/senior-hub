@@ -19,13 +19,6 @@ export type Claims = {
   exp: number;
 };
 
-export type Payload = {
-  id: string;
-  role: Role;
-  iat: number;
-  exp: number;
-};
-
 export const extract = (token: string): Claims => {
   const claims = token.split(".")[1];
   return JSON.parse(atob(claims));

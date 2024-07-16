@@ -1,9 +1,7 @@
 "use server";
 
-import { USER_SESSION_KEY } from "@/src/app/constants";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
-import { cookies } from "next/headers";
 import { HttpException } from "../types";
 
 export const execute = async <T>(request: () => Promise<AxiosResponse>): Promise<T> => {

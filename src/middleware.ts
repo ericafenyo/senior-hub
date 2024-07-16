@@ -5,7 +5,6 @@ import { isAuthenticated } from "@/core/auth";
 
 export async function middleware(request: NextRequest) {
   const authenticated = await isAuthenticated();
-  console.log("authenticated", authenticated);
 
   if (!authenticated) {
     const url = new URL("/login", request.url);

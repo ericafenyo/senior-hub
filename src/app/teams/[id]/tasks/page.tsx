@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const Tasks = () => {
+const Page = () => {
   return (
     <div>
       <h1>Tasks</h1>
-     <div>
+      <div>
         <div>
           <h2>Empty tash bin</h2>
           <p>Task description</p>
@@ -17,9 +17,9 @@ const Tasks = () => {
           <h2>New sheet on bed</h2>
           <p>Task description</p>
         </div>
-     </div>
+      </div>
     </div>
   );
 };
 
-export default Tasks;
+export default Page;

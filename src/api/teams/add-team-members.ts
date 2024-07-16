@@ -22,8 +22,6 @@ export const addTeamMember = async (formData: FormData) => {
 
   const body = { email, role };
 
-  console.log(body);
-
   try {
     const response = await http.post(`/teams/${teamId}/invitations`, body, config);
   } catch (error) {

@@ -5,7 +5,7 @@ import React from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 
-export type Props = {
+type Props = {
   className?: string;
   children: React.ReactNode;
 }

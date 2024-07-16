@@ -13,6 +13,7 @@ type Props = {
 }
 
 const MemberListPage = async (props: Props) => {
+  console.log(props);
   const roles = await getRoles();
   const { id } = props.params;
 

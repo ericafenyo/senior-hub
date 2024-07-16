@@ -14,7 +14,6 @@ export const getUserTeams = async (id: string): Promise<Team[]> => {
     }
 
     const response = await http.get(`/users/${id}/teams`, config);
-    console.log("client", response);
 
     return response.data;
   } catch (error) {

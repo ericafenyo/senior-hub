@@ -16,7 +16,6 @@ export const acceptInvitation = async (state: any, formData: FormData) => {
 
   try {
     const response = await http.post(`/invitations/accept`, { token }, config);
-    console.log(response.data);
   } catch (error) {
     console.error(error);
   }

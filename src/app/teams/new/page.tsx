@@ -2,9 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-import { createTeam } from "@/api/teams";
 import SubmitButton from "@/components/submit-button";
+import { createTeam } from "@/api/teams";
 
 const CreateTeam = async () => {
   return (

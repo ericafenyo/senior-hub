@@ -11,12 +11,12 @@ export const authenticate = async (formData: FormData) => {
 
   const request = {
     email: email as string,
-    password: password as string,
+    password: password as string
   };
 
   const tokens = await Accounts.authenticate(request);
 
-  setAuthentication(tokens.accessToken);
+  await setAuthentication(tokens.accessToken);
 
-  redirect("/");
+  redirect("/teams");
 };

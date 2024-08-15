@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const authenticated = await isAuthenticated();
 
   if (!authenticated) {
-    const url = new URL("/login", request.url);
+    const url = new URL("/sign-in", request.url);
     return NextResponse.redirect(url);
   }
   return NextResponse.next();
@@ -16,6 +16,6 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Protect all paths except /login and /sign-up
-    "/((?!login|sign-up|api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!sign-in|sign-up|api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

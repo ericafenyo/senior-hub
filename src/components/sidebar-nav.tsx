@@ -34,19 +34,21 @@ const items: any[] = [
 
 export const SidebarNav = ({ teamId }: Props) => {
   return (
-    <nav>
-      <ul className="px-2 space-y-2 text-sm font-medium">
-        {items.map((item, index) => (
-          <li key={index}>
-            <SidebarNavItem
-              key={index}
-              href={`/teams/${teamId}/${item.href}`}
-              name={item.icon}
-              title={item.title}
-            />
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <aside className="w-[240px] border-r h-full bg-white flex-shrink-0">
+      <nav className="h-full">
+        <ul className="px-2 space-y-2 text-sm font-medium">
+          {items.map((item, index) => (
+            <li key={index}>
+              <SidebarNavItem
+                key={index}
+                href={`/teams/${teamId}/${item.href}`}
+                name={item.icon}
+                title={item.title}
+              />
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   );
 };

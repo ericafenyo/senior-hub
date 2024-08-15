@@ -34,7 +34,7 @@ export default function RootLayout({ children }: Readonly<Props>) {
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange>
-      <div className="relative flex flex-col bg-background">
+      <div className="relative flex flex-col h-full">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -1,14 +1,5 @@
-export type Team = {
-  id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export type Role = {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-}
+export { type Address } from "./address";
+export { type Role } from "./role";
+export { type User } from "./user";
+export { type Team } from "./team";
+export { type Task } from "./task";

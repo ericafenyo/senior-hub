@@ -25,8 +25,8 @@ const Navbar = async () => {
     <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
       <div className="container">
         <div className="flex items-center gap-4 h-14">
-          <div className="">
-            <Link href="/public" className="flexitems-center gap-2 mr-6">
+          <div className="flex-1">
+            <Link href="/public" className="flex items-center gap-2 mr-6">
               <PackageOpen className="h-6 w-6" />
               <span className="hidden font-bold sm:inline-block">Senior hub</span>
             </Link>

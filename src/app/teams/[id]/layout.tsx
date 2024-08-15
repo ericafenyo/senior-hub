@@ -11,10 +11,8 @@ type Props = {
 
 const Layout = ({ children, params }: Props) => {
   return (
-    <div className="flex">
-      <div className="w-[200px]">
-        <SidebarNav teamId={params.id} />
-      </div>
+    <div className="flex h-full">
+      <SidebarNav teamId={params.id} />
       {children}
     </div>
   );

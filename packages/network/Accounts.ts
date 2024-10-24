@@ -9,6 +9,6 @@ export type AuthenticateRequest = {
 
 export namespace Accounts {
   export const authenticate = async (request: AuthenticateRequest): Promise<Tokens> => {
-    return execute(() => http.post("/authenticate", request));
+    return execute(() => http.post("/auth/login", request));
   };
 }

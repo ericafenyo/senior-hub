@@ -1,6 +1,7 @@
-// @flow
-import * as React from "react";
-import { SidebarNav } from "../../../components/sidebar-nav";
+import React from "react";
+
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { TeamSideNavigation } from "@/components/team-side-navigation";
 
 type Props = {
   children: React.ReactNode;
@@ -11,9 +12,14 @@ type Props = {
 
 const Layout = ({ children, params }: Props) => {
   return (
-    <div className="flex h-full">
-      <SidebarNav teamId={params.id} />
-      {children}
+    <div className="relative">
+      <SidebarProvider>
+        <TeamSideNavigation />
+        <main>
+          <SidebarTrigger />
+          {children}
+        </main>
+      </SidebarProvider>
     </div>
   );
 };

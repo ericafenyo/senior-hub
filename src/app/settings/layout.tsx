@@ -1,10 +1,10 @@
 import React from "react";
-import SideNavigation from "@/components/side-navigation";
+import TeamSideNavigation from "@/components/team-side-navigation";
 
 const Layout = ({ children }: { children: Readonly<React.ReactNode> }) => {
   return (
     <div className="flex">
-      <SideNavigation />
+      <TeamSideNavigation />
       {children}
     </div>
   );

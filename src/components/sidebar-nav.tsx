@@ -34,7 +34,7 @@ const items: any[] = [
 
 export const SidebarNav = ({ teamId }: Props) => {
   return (
-    <aside className="w-[240px] border-r h-full bg-white flex-shrink-0">
+    <aside className="w-[240px] h-full bg-white flex-shrink-0">
       <nav className="h-full">
         <ul className="px-2 space-y-2 text-sm font-medium">
           {items.map((item, index) => (

@@ -6,7 +6,7 @@ import { TeamSideNavigation } from "@/components/team-side-navigation";
 type Props = {
   children: React.ReactNode;
   params: {
-    id: string;
+    teamId: string;
   }
 };
 

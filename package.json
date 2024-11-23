@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -36,24 +36,25 @@
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.378.0",
-    "next": "^14.2.16",
+    "next": "15.0.3",
     "next-themes": "^0.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-hook-form": "^7.51.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.7"
+    "zod": "^3.23.7",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@types/lodash": "^4.17.5",
     "@types/node": "^20",
-    "@types/react": "^18.3.4",
-    "@types/react-dom": "^18",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "15.0.3",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
@@ -62,5 +63,9 @@
   },
   "workspaces": [
     "packages/network"
-  ]
+  ],
+  "overrides": {
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1"
+  }
 }

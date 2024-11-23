@@ -10,7 +10,7 @@ export type Authentication = {
 };
 
 export const getAuthentication = async (): Promise<Authentication> => {
-  const value = cookies().get(AUTH_SESSION_KEY)?.value;
+  const value = (await cookies()).get(AUTH_SESSION_KEY)?.value;
 
   if (!value) {
     return {
@@ -34,7 +34,7 @@ export const getToken = async (): Promise<string> => {
 };
 
 export const setAuthentication = async (token: string) => {
-  cookies().set(AUTH_SESSION_KEY, JSON.stringify({ token, status: "connected" }), {
+  (await cookies()).set(AUTH_SESSION_KEY, JSON.stringify({ token, status: "connected" }), {
     httpOnly: true
   });
 };

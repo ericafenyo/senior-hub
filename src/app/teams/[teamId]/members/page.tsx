@@ -7,15 +7,16 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type Props = {
-  params: {
-    id: string;
-  }
+  params: Promise<{
+    teamId: string;
+  }>
 }
 
 const MemberListPage = async (props: Props) => {
-  console.log(props);
+  console.log(/* @next-codemod-error 'props' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+  props);
   const roles = await getRoles();
-  const { id } = props.params;
+  const { id } = (await props.params);
 
   return (
     <div>

@@ -8,7 +8,7 @@ import { createNote } from "@/api/notes/create-notes";
 
 type Props = {
   params: {
-    id: string;
+    teamId: string;
   }
 };
 
@@ -32,7 +32,7 @@ export const CreateNote = ({ params }: Props) => {
             <Form.Field>
               <SubmitButton>Create task</SubmitButton>
             </Form.Field>
-            <input type="hidden" name="teamId" value={params.id} />
+            <input type="hidden" name="teamId" value={params.teamId} />
           </Form>
         </div>
       </div>

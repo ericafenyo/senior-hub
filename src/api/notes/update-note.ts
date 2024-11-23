@@ -3,29 +3,28 @@
 import { z } from "zod";
 import { getToken } from "@/core/auth";
 import { http } from "@/api/client";
-import { redirect } from "next/navigation";
 
-export const createNote = async (data: FormData) => {
+export const updateNote = async (data: FormData) => {
   const entries = Object.fromEntries(data);
 
   const schema = z.object({
     title: z.string(),
     content: z.string(),
-    teamId: z.string()
+    teamId: z.string().uuid(),
+    noteId: z.string().uuid()
   });
 
   try {
-    const { teamId, ...request } = schema.parse(entries);
+    const { teamId, noteId, ...request } = schema.parse(entries);
     const config = {
       headers: {
         Authorization: `Bearer ${await getToken()}`
       }
     };
 
-    await http.post(`/teams/${teamId}/notes`, request, config);
+    return await http.patch(`/teams/${teamId}/notes/${noteId}`, request, config)
+      .then(response => response.data);
   } catch (error) {
     console.log(error);
   }
-
-  redirect(`/teams/${data.get("teamId")}/notes`);
 };

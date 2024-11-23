@@ -152,20 +152,27 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
   );
 };
 
-type RichTextareaProps = React.InputHTMLAttributes<HTMLInputElement> & {
+type RichTextareaProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "value"> & {
   className?: string;
+  editable?: boolean;
+  value?: string | undefined;
 }
 
-export const RichTextarea = ({ className, ...props }: RichTextareaProps) => {
+export const RichTextarea = ({ className, editable, autoFocus, ...props }: RichTextareaProps) => {
   const [value, setValue] = useState<string>();
 
   const editor = useEditor({
     extensions: [StarterKit],
+    editable: editable,
+    autofocus: autoFocus,
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class: "typography max-w-none m-5 focus:outline-none"
       }
     },
+
+    content: props.value,
 
     onUpdate: ({ editor }) => {
       setValue(editor.getHTML());

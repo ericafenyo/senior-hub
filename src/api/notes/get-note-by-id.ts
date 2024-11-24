@@ -11,8 +11,6 @@ type GetNoteByIdOptions = {
 }
 
 export const getNoteById = async (options: GetNoteByIdOptions): Promise<Note> => {
-  console.log({ options });
-
   try {
     const { teamId, noteId } = z.object({
       teamId: z.string(),

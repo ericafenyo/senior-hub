@@ -13,10 +13,8 @@ type Props = {
 }
 
 const MemberListPage = async (props: Props) => {
-  console.log(/* @next-codemod-error 'props' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
-  props);
+  const params =  await props.params;
   const roles = await getRoles();
-  const { id } = (await props.params);
 
   return (
     <div>
@@ -38,7 +36,7 @@ const MemberListPage = async (props: Props) => {
                 }
               </SelectContent>
             </Select>
-            <Input name="teamId" type="hidden" value={id} />
+            <Input name="teamId" type="hidden" value={params.teamId} />
             <Button>Add</Button>
           </form>
         </div>

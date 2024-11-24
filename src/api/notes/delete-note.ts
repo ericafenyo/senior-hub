@@ -6,14 +6,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 
-export const deleteNote = async (data: FormData) => {
+export const deleteNote = async (data: any) => {
   try {
-    const entries = Object.fromEntries(data);
-
     const { teamId, noteId } = z.object({
       noteId: z.string(),
       teamId: z.string()
-    }).parse(entries);
+    }).parse(data);
 
     const config: RequestInit = {
       method: "DELETE",
@@ -25,8 +23,8 @@ export const deleteNote = async (data: FormData) => {
     await fetch(`${process.env.API_URL}/teams/${teamId}/notes/${noteId}`, config);
     // revalidatePath(`/teams/${teamId}/notes/${noteId}`);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
-  redirect(`/teams/${data.get("teamId")}/notes`);
+  redirect(`/teams/${data.teamId}/notes`);
 };

@@ -193,7 +193,7 @@ export const RichTextarea = ({ className, editable, autoFocus, ...props }: RichT
         editor={editor}
         className="outline-0 w-full"
       />
-      <input type="text" hidden {...props} value={value} defaultValue="" />
+      <input type="text" hidden {...props} value={value} defaultValue={props.value} />
     </div>
   );
 };

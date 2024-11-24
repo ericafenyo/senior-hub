@@ -24,7 +24,7 @@ export const createNote = async (data: FormData) => {
 
     await http.post(`/teams/${teamId}/notes`, request, config);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   redirect(`/teams/${data.get("teamId")}/notes`);

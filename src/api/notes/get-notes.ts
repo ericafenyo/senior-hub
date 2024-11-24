@@ -13,10 +13,9 @@ export const getNotes = async (teamId: string): Promise<Note[]> => {
     };
 
     const response = await http.get<Note[]>(`/teams/${teamId}/notes`, config);
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };

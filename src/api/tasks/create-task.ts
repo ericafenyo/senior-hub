@@ -30,10 +30,9 @@ export const createTask = async (state: any, formData: FormData) => {
       }
     };
 
-    const response = await http.post(`/teams/${teamId}/tasks`, request, config);
-    console.log(response.data);
+    await http.post(`/teams/${teamId}/tasks`, request, config);
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     return "An error occurred while validating data";
   }
 };

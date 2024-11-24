@@ -2,9 +2,9 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { PriorityFilter } from "./priority-filter";
-import { TasksTable } from "@/app/teams/[id]/tasks/tasks-table";
+import { TasksTable } from "@/app/teams/[teamId]/tasks/tasks-table";
 import { columns, TasksColumns } from "./tasks-columns";
-import { CreateTask } from "@/app/teams/[id]/tasks/create-task";
+import { CreateTask } from "@/app/teams/[teamId]/tasks/create-task";
 
 const data: TasksColumns[] = [
   {
@@ -20,12 +20,13 @@ const data: TasksColumns[] = [
 ];
 
 type Props = {
-  params: {
-    id: string;
-  }
+  params: Promise<{
+    teamId: string;
+  }>
 }
 
-const Page = ({ params }: Props) => {
+const Page = async (props: Props) => {
+  const params = await props.params;
   return (
     <main className="w-full">
       <div className="mx-6 py-6 text-2xl">

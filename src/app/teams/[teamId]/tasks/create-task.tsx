@@ -32,7 +32,7 @@ import { PrioritySelector } from "@/components/ui/priority-selector";
 
 type Props = {
   params: {
-    id: string;
+    teamId: string;
   }
 };
 
@@ -67,7 +67,7 @@ export const CreateTask = (props: Props) => {
           <Form.Field>
             <PrioritySelector name="priority" />
           </Form.Field>
-          <input type="hidden" name="teamId" value={props.params.id} />
+          <input type="hidden" name="teamId" value={props.params.teamId} />
 
           {/*<div className="flex items-center space-x-2">*/}
           {/*  <Switch id="repeat" defaultValue="true" />*/}

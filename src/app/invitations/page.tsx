@@ -3,13 +3,13 @@ import { validateInvitation } from "@/api";
 import { AcceptInvitation } from "@/app/invitations/accept-invitation";
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     token: string;
-  };
+  }>;
 }
 
 const InvitationPage = async (props: Props) => {
-  const { token } = props.searchParams;
+  const { token } = (await props.searchParams);
 
   try {
     const invitation = await validateInvitation(token);

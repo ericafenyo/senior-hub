@@ -7,15 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type Props = {
-  params: {
-    id: string;
-  }
+  params: Promise<{
+    teamId: string;
+  }>
 }
 
 const MemberListPage = async (props: Props) => {
-  console.log(props);
+  const params =  await props.params;
   const roles = await getRoles();
-  const { id } = props.params;
 
   return (
     <div>
@@ -37,7 +36,7 @@ const MemberListPage = async (props: Props) => {
                 }
               </SelectContent>
             </Select>
-            <Input name="teamId" type="hidden" value={id} />
+            <Input name="teamId" type="hidden" value={params.teamId} />
             <Button>Add</Button>
           </form>
         </div>

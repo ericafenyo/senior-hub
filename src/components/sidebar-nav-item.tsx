@@ -21,8 +21,7 @@ export const SidebarNavItem = ({ name, title, href }: Props) => {
       className={
         cn(
           "flex items-center space-x-2 px-3 py-2 rounded-lg text-slate-900 ",
-          // flex items-center space-x-2 p-2 rounded-md hover:bg-slate-100
-          pathname === href ? "bg-primary/20" : "hover:bg-primary/20"
+          pathname === href ? "bg-muted/90" : "hover:bg-muted/90"
         )
       }
     >

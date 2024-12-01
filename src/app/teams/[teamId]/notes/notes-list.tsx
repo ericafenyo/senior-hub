@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { Note } from "@/types";
 import Link from "next/link";
 import { FileText } from "lucide-react";
-import { useStore } from "@/stores/notes-store";
 
 type Props = {
   params: {
@@ -13,11 +11,6 @@ type Props = {
   notes: Note [];
 };
 export const NotesList = ({ notes, params }: Props) => {
-  const store = useStore();
-
-  useEffect(() => {
-    store.setNotes(notes);
-  }, [notes]);
 
   return (
     <div className="flex-col flex">

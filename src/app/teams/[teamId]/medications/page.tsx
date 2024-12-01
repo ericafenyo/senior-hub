@@ -1,11 +1,28 @@
-import React from "react";
+import Link from "next/link";
 
-const Page = () => {
+import { getMedications } from "@/api/medications/get-medications";
+import { TeamOptions } from "@/app/prop-types";
+import { Medication } from "@/types";
+import { MedicationDataTable } from "@/app/teams/[teamId]/medications/medication-data-table";
+
+type Props = {
+  params: Promise<TeamOptions>
+}
+
+const MedicationsPage = async ({ params }: Props) => {
+  const { teamId } = await params;
+  const medications: Medication[] = await getMedications(teamId);
+
   return (
     <div>
-      <h1>Medications</h1>
+      <div className="container">
+        <div className="">
+          Medication list page
+          <MedicationDataTable medications={medications} />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default MedicationsPage;

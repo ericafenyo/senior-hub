@@ -5,12 +5,15 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarHeader,
   SidebarGroupContent,
   SidebarGroup
 } from "@/components/ui/sidebar";
 
-import { Calendar, ClipboardList, LucideProps, NotebookPen, Pill, Users } from "lucide-react";
+import { Calendar, ClipboardList, NotebookPen, Pill, Users } from "lucide-react";
+
+type Props = {
+  teamId: string;
+}
 
 const items = [
   {
@@ -40,7 +43,7 @@ const items = [
   }
 ];
 
-export const TeamSideNavigation = () => {
+export const TeamSideNavigation = ({ teamId }: Props) => {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarContent>
@@ -50,7 +53,7 @@ export const TeamSideNavigation = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.href}>
+                    <a href={`/teams/${teamId}/${item.href}`}>
                       <item.icon />
                       <span>{item.title}</span>
                     </a>

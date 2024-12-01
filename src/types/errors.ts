@@ -1,6 +1,4 @@
-export class ValidationError extends Error {
-
-}
+export class ValidationError extends Error {}
 
 type NetworkErrorOptions = {
   message?: string;

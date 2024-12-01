@@ -25,7 +25,7 @@ import {
   SelectItem,
   SelectValue
 } from "@/components/ui/select";
-import { DateInput } from "@/components/date-input";
+import { InlineDateInput } from "@/components/inline-date-input";
 
 import { useActionState, useState } from "react";
 import { PrioritySelector } from "@/components/ui/priority-selector";
@@ -62,7 +62,7 @@ export const CreateTask = (props: Props) => {
           </Form.Field>
           <Form.Field>
             <Label htmlFor="dueDate">Due Date:</Label>
-            <DateInput name="dueDate" />
+            <InlineDateInput name="dueDate" />
           </Form.Field>
           <Form.Field>
             <PrioritySelector name="priority" />

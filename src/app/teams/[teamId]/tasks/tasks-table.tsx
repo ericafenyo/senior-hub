@@ -26,7 +26,7 @@ export function TasksTable<Data, Value>({ columns, data }: Props<Data, Value>) {
   const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() });
 
   return (
-    <div className="py-6">
+    <div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

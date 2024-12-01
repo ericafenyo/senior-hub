@@ -4,7 +4,6 @@ import { type ThemeProviderProps } from "next-themes/dist/types";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import "./globals.css";
 

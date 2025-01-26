@@ -30,20 +30,20 @@ export default function RootLayout({ children }: Readonly<Props>) {
   return (
     <html lang="en">
     <body className={inter.className}>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange>
+    {/*<ThemeProvider*/}
+    {/*  attribute="class"*/}
+    {/*  // defaultTheme="system"*/}
+    {/*  enableSystem*/}
+    {/*  disableTransitionOnChange>*/}
         <div className="relative flex flex-col h-full overflow-hidden">
-          <Navbar />
-          <main className="flex-1">
+          {/*<Navbar />*/}
+          <main className="flex-1 bg-muted">
             {children}
           </main>
 
           <Footer />
         </div>
-    </ThemeProvider>
+    {/*</ThemeProvider>*/}
     </body>
     </html>
   );

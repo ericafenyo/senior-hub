@@ -1,6 +1,6 @@
 "use server";
 
-import { http } from "@/api/client";
+import { http } from "@/api/utils";
 import { getAuthentication } from "@/core/auth";
 
 type Request = {
@@ -16,14 +16,13 @@ export const addTeamMember = async (formData: FormData) => {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${authentication.token}`
+      Authorization: `Bearer ${authentication.accessToken}`
     }
   };
 
-  const body = { email, role };
 
   try {
-    const response = await http.post(`/teams/${teamId}/invitations`, body, config);
+    const response = await http.post(`/teams/${teamId}/invitations`, JSON.stringify({ email, role }), config);
   } catch (error) {
     console.error(error);
   }

@@ -1,59 +1,118 @@
-import { cookies } from "next/headers";
-import { isExpired, extract } from "./utils";
+"use server";
 
-const AUTH_SESSION_KEY = "SENIOR_HUB_AUTH_SESSION";
+import { cookies as getCookies } from "next/headers";
+import { z } from "zod";
+import { Tokens } from "@/types/tokens";
+import { isEmpty } from "lodash";
 
+const AUTH_SESSION_KEY = "__CARE_HUB_AUTH_SESSION__";
+
+/**
+ * The authentication object that is cached to keep the user connected.
+ */
 export type Authentication = {
-  token: string | null;
+  /**
+   * The accessToken is used for authorized access to protected resources.
+   */
+  accessToken?: string;
+
+  /**
+   * The refreshToken is used to get a new access token when the current one expires.
+   */
+  refreshToken?: string;
+
+  /**
+   * The status of the authentication session.
+   * - "idle": No active session, user is not authenticated.
+   * - "connected": User is authenticated and actively connected.
+   * - "disconnected": User is disconnected, requiring reauthentication.
+   */
   status: "idle" | "connected" | "disconnected";
-  isAuthenticated: boolean;
+
+  /**
+   * The timestamp when the session was last updated.
+   * This helps track the session's freshness and determine when a refresh might be needed.
+   */
+  updated?: Date;
+};
+
+/**
+ * The default session when the user is not connected
+ */
+const EMPTY_AUTH_SESSION: Authentication = {
+  status: "idle"
 };
 
 export const getAuthentication = async (): Promise<Authentication> => {
-  const value = (await cookies()).get(AUTH_SESSION_KEY)?.value;
+  const cookies = await getCookies();
+  const jsonString = cookies.get(AUTH_SESSION_KEY)?.value ?? JSON.stringify(EMPTY_AUTH_SESSION);
 
-  if (!value) {
-    return {
-      token: null,
-      status: "idle",
-      isAuthenticated: false
-    };
-  }
+  const session = JSON.parse(jsonString);
 
-  const entries = JSON.parse(value);
   return {
-    token: entries.token,
-    status: entries.status,
-    isAuthenticated: entries.token && !isExpired(entries.token)
+    accessToken: session.accessToken,
+    refreshToken: session.refreshToken,
+    status: session.status,
+    updated: session.updated
   };
 };
 
-export const getToken = async (): Promise<string> => {
-  const authentication = await getAuthentication();
-  return authentication.token || "";
+export const getAccessToken = async (): Promise<string> => {
+  return getAuthentication().then(authentication => authentication.accessToken ?? "");
 };
 
-export const setAuthentication = async (token: string) => {
-  (await cookies()).set(AUTH_SESSION_KEY, JSON.stringify({ token, status: "connected" }), {
-    httpOnly: true
-  });
+export const getRefreshToken = async (): Promise<string> => {
+  return getAuthentication().then(authentication => authentication.refreshToken ?? "");
 };
 
+export const getTokens = async (): Promise<Tokens> => {
+  return getAuthentication().then(authentication => ({
+    accessToken: authentication.accessToken ?? "",
+    refreshToken: authentication.refreshToken ?? ""
+  }));
+};
+
+/**
+ * Sets the authentication session using the provided tokens.
+ *
+ * @param {Object} tokens - The tokens to set authentication.
+ * @throws an error if the tokens are empty.
+ */
+export const setAuthentication = async (tokens: Tokens): Promise<void> => {
+  try {
+    // Validate the 'tokens' object
+    const result = z
+      .object({
+        accessToken: z.string().min(1),
+        refreshToken: z.string().min(1)
+      })
+      .parse(tokens);
+
+    // Retrieve the cookie object
+    const cookies = await getCookies();
+
+    // Create a new authentication session object
+    const session: Authentication = {
+      accessToken: tokens.accessToken,
+      refreshToken: result.refreshToken,
+      status: "connected",
+      updated: new Date()
+    };
+
+    // Store the session as an HTTP-only cookie
+    cookies.set(AUTH_SESSION_KEY, JSON.stringify(session), { httpOnly: true });
+  } catch (error) {
+    console.error("Failed to set authentication:", error);
+    throw error;
+  }
+};
+
+/**
+ * Checks if the user is authenticated.
+ *
+ * @returns {Promise<boolean>} true if the user is authenticated, otherwise false.
+ */
 export const isAuthenticated = async (): Promise<boolean> => {
-  const authentication = await getAuthentication();
-
-  if (!authentication.token) {
-    return false;
-  }
-  return !isExpired(authentication.token);
-};
-
-export const getUserId = async (): Promise<string> => {
-  const authentication = await getAuthentication();
-  if (!authentication.token) {
-    return "";
-  }
-
-  const sub = extract(authentication.token).sub;
-  return sub.split("|")[1] || "";
+  const { accessToken, refreshToken, status } = await getAuthentication();
+  return (!isEmpty(accessToken)) && (!isEmpty(refreshToken)) && status === "connected";
 };

@@ -26,11 +26,13 @@
 
 ```json
 {
+  "id": "200e287f-6f5f-4a15-803f-bbb7beca1a6d",
   "firstName": "Didier",
   "lastName": "N'Diaye",
   "email": "didier.ndiaye@example.fr",
   "password": "4u1oX0vAf4gPfLZ8",
-  "birthdate": "1986-07-15",
+  "birthDate": "1986-07-15",
+  "photoUrl": null,
   "address": {
     "street": "45 Rue de Bonnel",
     "postalCode": "69003",

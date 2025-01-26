@@ -1,7 +1,7 @@
 "use server";
 
-import { getToken } from "@/core/auth";
-import { http } from "@/api/client";
+import { getAccessToken } from "@/core/auth";
+import { http } from "@/api/utils";
 import { z } from "zod";
 
 export const createTask = async (state: any, formData: FormData) => {
@@ -22,7 +22,7 @@ export const createTask = async (state: any, formData: FormData) => {
 
     const request: Request = { title, description, dueDate, priority };
 
-    const token = await getToken();
+    const token = await getAccessToken();
 
     const config = {
       headers: {
@@ -30,7 +30,7 @@ export const createTask = async (state: any, formData: FormData) => {
       }
     };
 
-    await http.post(`/teams/${teamId}/tasks`, request, config);
+    await http.post(`/teams/${teamId}/tasks`, JSON.stringify(request), config);
   } catch (error: any) {
     console.error(error);
     return "An error occurred while validating data";

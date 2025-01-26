@@ -1,6 +1,6 @@
 "use server";
 
-import { getToken } from "@/core/auth";
+import { getAccessToken } from "@/core/auth";
 import { Note } from "@/types";
 import { LRUCache } from "lru-cache";
 import { z } from "zod";
@@ -23,7 +23,7 @@ export const getNoteById = async (options: GetNoteByIdOptions): Promise<Note> =>
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${await getToken()}`
+        Authorization: `Bearer ${await getAccessToken()}`
       }
     };
 

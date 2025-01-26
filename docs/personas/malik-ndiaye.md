@@ -27,11 +27,13 @@
 
 ```json
 {
+  "id": "3a355e52-2dad-4e1f-a36f-41648ea707f0",
   "firstName": "Malik",
   "lastName": "N'Diaye",
   "email": "malik.ndiaye@example.fr",
   "password": "2iQ90wkQwc3sxBNy",
-  "birthdate": "1989-02-10",
+  "birthDate": "1989-02-10",
+  "photoUrl": null,
   "address": {
     "street": "30 Avenue Jean Rieux",
     "postalCode": "31500",

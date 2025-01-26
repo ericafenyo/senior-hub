@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PackageOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { getAuthentication } from "@/core/auth";
+import { isAuthenticated } from "@/core/auth";
 
 const AuthenticationActions = () => {
   return (
@@ -19,8 +19,6 @@ const AuthenticationActions = () => {
 };
 
 const Navbar = async () => {
-  const { isAuthenticated } = await getAuthentication();
-
   return (
     <header className=" top-0 z-50 w-full bg-background border-b border-border/40 ">
       <div className="container">
@@ -32,7 +30,7 @@ const Navbar = async () => {
             </Link>
           </div>
 
-          {!isAuthenticated && <AuthenticationActions />}
+          {!await (isAuthenticated()) && <AuthenticationActions />}
 
           <ThemeSwitcher />
         </div>

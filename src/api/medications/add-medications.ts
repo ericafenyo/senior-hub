@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { getToken } from "@/core/auth";
+import { getAccessToken } from "@/core/auth";
 import { redirect } from "next/navigation";
 
 export const addMedication = async (
@@ -28,7 +28,7 @@ export const addMedication = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${await getToken()}`
+        Authorization: `Bearer ${await getAccessToken()}`
       },
       body: JSON.stringify(result.data)
     };

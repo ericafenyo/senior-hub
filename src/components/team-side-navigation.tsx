@@ -46,7 +46,7 @@ const items = [
 export const TeamSideNavigation = ({ teamId }: Props) => {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarContent>
+      <SidebarContent className="bg-white">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>

@@ -6,63 +6,151 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarGroupContent,
-  SidebarGroup
+  SidebarGroup, SidebarGroupLabel, SidebarHeader
 } from "@/components/ui/sidebar";
 
-import { Calendar, ClipboardList, NotebookPen, Pill, Users } from "lucide-react";
+import {
+  Calendar,
+  SquareActivity,
+  LayoutGrid,
+  NotebookPen,
+  Pill,
+  Users,
+  User,
+  CircleCheckBig,
+  Bell,
+  PackageOpen
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   teamId: string;
 }
 
-const items = [
-  {
-    href: "reminders",
-    icon: Calendar,
-    title: "Reminders"
-  },
-  {
-    href: "medications",
-    icon: Pill,
-    title: "Medications"
-  },
-  {
-    href: "tasks",
-    icon: ClipboardList,
-    title: "Tasks"
-  },
-  {
-    href: "notes",
-    icon: NotebookPen,
-    title: "Notes"
-  },
-  {
-    href: "members",
-    icon: Users,
-    title: "Members"
-  }
-];
+const PatientInvitationMenu = ({ teamId }: { teamId: string }) => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Patient</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu className="space-y-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/patient-info`}>
+                <User />
+                <span>Patient Information</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/vitals`}>
+                <SquareActivity />
+                <span>Vitals</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
+
+const TeamSettingsMenu = ({ teamId }: { teamId: string }) => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Settings</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu className="space-y-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/overview`}>
+                <LayoutGrid />
+                <span>Overview</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/members`}>
+                <Users />
+                <span>Members</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
+
+const TeamMenu = ({ teamId }: { teamId: string }) => {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Team</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu className="space-y-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/appointments`}>
+                <Calendar />
+                <span>Appointments</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/medications`}>
+                <Pill />
+                <span>Medications</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/tasks`}>
+                <CircleCheckBig />
+                <span>Tasks</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a href={`/teams/${teamId}/notes`}>
+                <NotebookPen />
+                <span>Notes</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
 
 export const TeamSideNavigation = ({ teamId }: Props) => {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={`/teams/${teamId}/${item.href}`}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+      <SidebarHeader className="bg-white border-b border-border h-16 flex items-center justify-center">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild className="h-full">
+              <div className="flex items-center justify-between">
+                <div className="flex space-x-3 items-center">
+                  <PackageOpen />
+                  <span>Care Hub</span>
+                </div>
+                <Button variant="outline" size="icon" className="shadow-none">
+                  <Bell className="h-5 w-5" />
+                </Button>
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent className="bg-white">
+        <TeamMenu teamId={teamId} />
+        <PatientInvitationMenu teamId={teamId} />
+        <TeamSettingsMenu teamId={teamId} />
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>

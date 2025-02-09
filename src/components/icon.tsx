@@ -3,8 +3,10 @@ import { Calendar, ClipboardList, LucideProps, NotebookPen, Pill, Users } from "
 import dynamic from "next/dynamic";
 import dynamicIconImports from "lucide-react/dynamicIconImports";
 
+export type IconName = keyof typeof dynamicIconImports;
+
 export interface IconProps extends LucideProps {
-  name: keyof typeof dynamicIconImports;
+  name: IconName;
 }
 
 export const Icon = ({ name, ...props }: IconProps) => {

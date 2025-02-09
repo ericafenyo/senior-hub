@@ -30,11 +30,13 @@
 
 ```json
 {
+  "id": "9fb3ea82-e692-4ef4-9545-3915acb5ad96",
   "firstName": "Maria",
   "lastName": "Rodriguez",
   "email": "maria.rodriguez@yopmail.fr",
   "password": "jxPBx1F8iK6ZleoW",
-  "birthdate": "1994-08-15",
+  "birthDate": "1994-08-15",
+  "photoUrl": null,
   "address": {
     "street": "15 Quai Jean Moulin",
     "postalCode": "69001",
@@ -47,4 +49,4 @@
 ## Avatar
 
 ![Avatar of Maria Rodriguez](../assets/images/maria-rodriguez.jpg)
-> Photo by Andrea Piacquadio: https://www.pexels.com/photo/woman-in-collared-shirt-774909/
+> Photo by Andrea Piacquadio: <https://www.pexels.com/photo/woman-in-collared-shirt-774909/>

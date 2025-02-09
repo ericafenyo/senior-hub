@@ -1,20 +1,18 @@
 "use server";
 
-import { http } from "@/api/client";
-import { getAuthentication } from "@/core/auth";
-import { AxiosResponse } from "axios";
+import { http } from "@/api/utils";
+import { getAccessToken } from "@/core/auth";
 import { Role } from "@/types";
 
 export const getRoles = async (): Promise<Array<Role>> => {
-  const authentication = await getAuthentication();
 
   const config = {
     headers: {
-      Authorization: `Bearer ${authentication.token}`
+      Authorization: `Bearer ${await getAccessToken()}`
     }
   };
 
-  const response: AxiosResponse<Array<Role>> = await http.get("/roles", config);
+  const response = await http.get("/roles", config);
 
-  return response.data;
+  return response.json();
 };

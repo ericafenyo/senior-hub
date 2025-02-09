@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { PriorityFilter } from "./priority-filter";
@@ -28,11 +27,11 @@ type Props = {
 const Page = async (props: Props) => {
   const params = await props.params;
   return (
-    <main className="w-full">
-      <div className="mx-6 py-6 text-2xl">
+    <section className="container">
+      <div className="py-6 text-2xl">
         <h2>Tasks</h2>
       </div>
-      <div className="bg-background rounded mx-6 p-4">
+      <div className="bg-background rounded-lg border border-border p-4">
         <div className="flex items-center justify-between">
           <div className="flex flex-1 space-x-2">
             <Input className="w-[248px] h-8" placeholder="Search tasks" />
@@ -46,7 +45,7 @@ const Page = async (props: Props) => {
           <TasksTable columns={columns} data={data} />
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 

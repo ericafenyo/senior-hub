@@ -27,11 +27,13 @@
 
 ```json
 {
+   "id": "31746130-4e97-4785-a8cc-15d2dd8023c0",
   "firstName": "Pierre",
   "lastName": "Martin",
   "email": "pierre.martin@example.fr",
   "password": "6uV6vc7hn307kblg",
-  "birthdate": "1957-08-30",
+  "birthDate": "1957-08-30",
+  "photoUrl": null,
   "address": {
     "street": "12 Rue de la République",
     "postalCode": "13002",

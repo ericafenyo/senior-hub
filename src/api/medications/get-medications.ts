@@ -1,6 +1,6 @@
 "use server";
 
-import { getToken } from "@/core/auth";
+import { getAccessToken } from "@/core/auth";
 import { Medication } from "@/types";
 
 export const getMedications = async (teamId: string): Promise<Medication[]> => {
@@ -8,7 +8,7 @@ export const getMedications = async (teamId: string): Promise<Medication[]> => {
     method: "GET",
     headers: {
       "Accept": "application/json",
-      Authorization: `Bearer ${await getToken()}`
+      Authorization: `Bearer ${await getAccessToken()}`
     }
   };
 

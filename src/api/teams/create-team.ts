@@ -1,7 +1,7 @@
-'use server';
+"use server";
 
-import {getAuthentication, getUserId} from "@/core/auth";
-import {http} from "../client"
+import { getAccessToken } from "@/core/auth";
+import { http } from "@/api/utils";
 
 type Request = {
   name: string;
@@ -9,23 +9,20 @@ type Request = {
 };
 
 export const createTeam = async (formData: FormData): Promise<void> => {
-  const authentication = await getAuthentication()
-  const id = await getUserId();
-
   const request: Request = {
-    name: formData.get('name') as string,
-    description: formData.get('description') as string,
-  }
+    name: formData.get("name") as string,
+    description: formData.get("description") as string
+  };
 
   const config = {
     headers: {
-      Authorization: `Bearer ${authentication.token}`,
-    },
+      Authorization: `Bearer ${await getAccessToken()}`
+    }
   };
 
   try {
-    await http.post(`users/${id}/teams`, request, config);
+    await http.post(`/teams`, JSON.stringify(request), config);
   } catch (e) {
     console.error(e);
   }
-}
+};

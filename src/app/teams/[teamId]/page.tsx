@@ -8,7 +8,7 @@ type Props = {
 
 const Page = async (props: Props) => {
   const params = await props.params;
-  return redirect(`/teams/${params.teamId}/reminders`);
+  return redirect(`/teams/${params.teamId}/appointments`);
 };
 
 export default Page;

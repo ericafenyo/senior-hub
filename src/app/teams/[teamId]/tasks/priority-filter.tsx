@@ -11,7 +11,7 @@ export const PriorityFilter = () => {
   return (
     <div>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button variant="outline" className="h-8">
             <PlusCircle className="w-4 h-4 mr-2" />
             Priority

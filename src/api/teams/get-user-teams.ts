@@ -1,23 +1,25 @@
-'use server';
+"use server";
 
-import {http} from "../client";
-import {getToken} from "@/core/auth"
-import {Team} from "@/types";
+import { getAccessToken } from "@/core/auth";
+import { Team } from "@/types";
+import { buildUrl } from "@/api/utils";
 
-export const getUserTeams = async (id: string): Promise<Team[]> => {
+export const getUserTeams = async (): Promise<Team[]> => {
   try {
-    const token = await getToken();
-    const config = {
+    const request = new Request(buildUrl("/teams"), {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${await getAccessToken()}`
+      }
+    });
+
+    const r = await fetch(request);
+    if (!r.ok) {
+      return [];
     }
 
-    const response = await http.get(`/users/${id}/teams`, config);
-
-    return response.data;
+    return await r.json();
   } catch (error) {
     console.error("client", error);
     return [];
   }
-}
+};

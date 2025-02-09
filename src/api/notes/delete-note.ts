@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { getToken } from "@/core/auth";
+import { getAccessToken } from "@/core/auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -16,7 +16,7 @@ export const deleteNote = async (data: any) => {
     const config: RequestInit = {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${await getToken()}`
+        Authorization: `Bearer ${await getAccessToken()}`
       }
     };
 

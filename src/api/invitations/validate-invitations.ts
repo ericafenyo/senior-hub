@@ -1,20 +1,19 @@
 "use server";
 
-import { http } from "@/api/client";
-import { getAuthentication } from "@/core/auth";
+import { http } from "@/api/utils";
+import { getAccessToken } from "@/core/auth";
 
 export const validateInvitation = async (token: string) => {
-  const authentication = await getAuthentication();
 
   const config = {
     headers: {
-      Authorization: `Bearer ${authentication.token}`,
-    },
+      Authorization: `Bearer ${await getAccessToken()}`
+    }
   };
 
   try {
-    const response = await http.post(`/invitations/validate`, { token }, config);
-    return response.data;
+    const response = await http.post(`/invitations/validate`, JSON.stringify({ token }), config);
+    return response.json();
   } catch (error) {
     console.error(error);
     throw error;

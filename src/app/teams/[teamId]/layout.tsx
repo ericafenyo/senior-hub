@@ -21,15 +21,11 @@ type Props = {
   }
 };
 
-const Layout = ({ children, params }: Props) => {
+const TeamLayout = ({ children, params }: Props) => {
   return (
     <div className="relative">
       <SidebarProvider>
         <TeamSideNavigation teamId={params.teamId} />
-        <main>
-          {/*<SidebarTrigger />*/}
-          {/*{children}*/}
-        </main>
         <SidebarInset>
           <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
@@ -48,7 +44,7 @@ const Layout = ({ children, params }: Props) => {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
-          <div className="flex flex-1 flex-col p-4">
+          <div className="flex flex-1 flex-col bg-muted">
             {children}
           </div>
         </SidebarInset>
@@ -57,4 +53,4 @@ const Layout = ({ children, params }: Props) => {
   );
 };
 
-export default Layout;
+export default TeamLayout;

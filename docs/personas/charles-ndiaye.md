@@ -28,11 +28,13 @@
 
 ```json
 {
+   "id": "fd3c230a-227c-4acc-ae5a-bdb178691e87",
   "firstName": "Charles",
   "lastName": "N'Diaye",
   "email": "charles.ndiaye@example.fr",
   "password": "Jn4r8wV8d4ytunjX",
-  "birthdate": "1959-04-20",
+  "birthDate": "1959-04-20",
+  "photoUrl": null,
   "address": {
     "street": "10 Rue de la République",
     "postalCode": "13002",

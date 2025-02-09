@@ -18,7 +18,6 @@ const PersonalInformation = () => {
           />
         </FormField>
 
-
         <FormField htmlFor="lastName" label="Last name" className="flex-1">
           <Input
             autoComplete="off"

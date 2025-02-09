@@ -2,8 +2,8 @@
 
 import { redirect } from "next/navigation";
 
-import { Accounts } from "@senior-hub/network";
 import { setAuthentication } from "@/core/auth";
+import { Accounts } from "@/services/accounts";
 
 export const authenticate = async (formData: FormData) => {
   const email = formData.get("email");
@@ -14,9 +14,14 @@ export const authenticate = async (formData: FormData) => {
     password: password as string
   };
 
-  const tokens = await Accounts.authenticate(request);
+  try {
+    const tokens = await Accounts.authenticate(request);
 
-  await setAuthentication(tokens.accessToken);
+
+    await setAuthentication(tokens);
+  } catch (e) {
+    console.error(e);
+  }
 
   redirect("/teams");
 };

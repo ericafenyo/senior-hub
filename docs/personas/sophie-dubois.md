@@ -32,11 +32,13 @@
 
 ```json
 {
+  "id": "035ee431-5732-4915-a8be-427bb08acb41",
   "firstName": "Sophie",
   "lastName": "Dubois",
   "email": "sophie.dubois@example.fr",
   "password": "2w6PFYdhNAs0Nz7y",
-  "birthdate": "1984-03-12",
+  "birthDate": "1984-03-12",
+  "photoUrl": null,
   "address": {
     "street": "22 Rue de Bercy",
     "postalCode": "75012",
@@ -49,4 +51,4 @@
 ## Avatar
 
 ![Avatar of Sophie Dubois](../assets/images/sophie-dubois.jpg)
-> Photo by Karolina Kaboompics: https://www.pexels.com/photo/a-woman-sitting-behind-her-desk-8528739/
+> Photo by Karolina Kaboompics: <https://www.pexels.com/photo/a-woman-sitting-behind-her-desk-8528739/>

@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
+import { cn } from "@/lib/utils";
 
 type DateInputProps = {
   disabled?: boolean;
@@ -20,7 +21,7 @@ export const DateInput = (props: DateInputProps) => {
   return (
     <div>
       <DateTimePicker
-        className={className}
+        className={cn("w-full", className)}
         onChange={(date) => setDate(date)}
         value={date}
         placeholder={placeholder}

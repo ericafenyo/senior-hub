@@ -14,6 +14,11 @@ type DateInputProps = {
   value?: Date;
 };
 
+/**
+ * Text input component for selecting a date.
+ *
+ * @param props {DateInputProps}  - The input properties for the component
+ */
 export const DateInput = (props: DateInputProps) => {
   const { value, onChange, className, name, disabled, id, placeholder } = props;
   const [date, setDate] = useState<Date | undefined>();

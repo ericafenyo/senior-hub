@@ -3,73 +3,72 @@
 import { cookies as getCookies } from "next/headers";
 import { z } from "zod";
 import { Tokens } from "@/types/tokens";
-import { isEmpty } from "lodash";
+import { sessions } from "@/services/sessions";
+import { jwts } from "@/utilities/jwts";
+import Logger from "@/utilities/logger";
+
+Logger.defaultMeta = { tag: "AUTHENTICATION" };
+
 
 const AUTH_SESSION_KEY = "__CARE_HUB_AUTH_SESSION__";
-
 /**
  * The authentication object that is cached to keep the user connected.
  */
 export type Authentication = {
   /**
-   * The accessToken is used for authorized access to protected resources.
+   * An identifier for the authentication session.
    */
-  accessToken?: string;
+  id?: string;
 
   /**
-   * The refreshToken is used to get a new access token when the current one expires.
-   */
-  refreshToken?: string;
-
-  /**
-   * The status of the authentication session.
-   * - "idle": No active session, user is not authenticated.
-   * - "connected": User is authenticated and actively connected.
-   * - "disconnected": User is disconnected, requiring reauthentication.
-   */
-  status: "idle" | "connected" | "disconnected";
-
-  /**
-   * The timestamp when the session was last updated.
-   * This helps track the session's freshness and determine when a refresh might be needed.
+   * This is the date the session was last updated.
    */
   updated?: Date;
 };
 
-/**
- * The default session when the user is not connected
- */
-const EMPTY_AUTH_SESSION: Authentication = {
-  status: "idle"
-};
-
 export const getAuthentication = async (): Promise<Authentication> => {
-  const cookies = await getCookies();
-  const jsonString = cookies.get(AUTH_SESSION_KEY)?.value ?? JSON.stringify(EMPTY_AUTH_SESSION);
 
-  const session = JSON.parse(jsonString);
+  const cookies = await getCookies();
+  const jsonString = cookies.get(AUTH_SESSION_KEY)?.value ?? "{}";
+
+  const value = JSON.parse(jsonString);
 
   return {
-    accessToken: session.accessToken,
-    refreshToken: session.refreshToken,
-    status: session.status,
-    updated: session.updated
+    id: value.id,
+    updated: new Date(value.updated)
   };
 };
 
 export const getAccessToken = async (): Promise<string> => {
-  return getAuthentication().then(authentication => authentication.accessToken ?? "");
+  Logger.debug("getAccessToken() called");
+  const tokens = await getTokens();
+  Logger.debug("tokens", tokens);
+  return tokens.accessToken;
+  // return getTokens().then(tokens => tokens.accessToken);
 };
 
 export const getRefreshToken = async (): Promise<string> => {
-  return getAuthentication().then(authentication => authentication.refreshToken ?? "");
+  return getTokens().then(tokens => tokens.refreshToken);
 };
 
 export const getTokens = async (): Promise<Tokens> => {
-  return getAuthentication().then(authentication => ({
-    accessToken: authentication.accessToken ?? "",
-    refreshToken: authentication.refreshToken ?? ""
-  }));
+  Logger.debug("getTokens()");
+  const authentication = await getAuthentication();
+  console.log("authentication", authentication);
+  Logger.debug("authentication", authentication);
+  if (!authentication.id) {
+    throw new Error("No authentication session found.");
+  }
+
+  // const jsonString = await sessions.retrieve(authentication.id) ?? JSON.stringify({});
+
+
+  const session = JSON.parse("{}");
+
+  return {
+    accessToken: session.accessToken ?? "",
+    refreshToken: session.refreshToken ?? ""
+  };
 };
 
 /**
@@ -81,26 +80,35 @@ export const getTokens = async (): Promise<Tokens> => {
 export const setAuthentication = async (tokens: Tokens): Promise<void> => {
   try {
     // Validate the 'tokens' object
-    const result = z
-      .object({
-        accessToken: z.string().min(1),
-        refreshToken: z.string().min(1)
-      })
-      .parse(tokens);
+    z.object({
+      accessToken: z.string().min(1),
+      refreshToken: z.string().min(1)
+    }).parse(tokens);
 
-    // Retrieve the cookie object
+    // Extract the claims from the access token
+    // This will throw an error if the token is invalid
+    const claims = jwts.extract(tokens.accessToken);
+    const userId = claims.sub.split("|")[1];
+
+    // Cache the tokens and user ID
+    await sessions.save({ userId, tokens });
+
+    // After that, we will save some information to the cookie
     const cookies = await getCookies();
 
     // Create a new authentication session object
-    const session: Authentication = {
-      accessToken: tokens.accessToken,
-      refreshToken: result.refreshToken,
-      status: "connected",
+    const authentication: Authentication = {
+      id: userId,
       updated: new Date()
     };
 
     // Store the session as an HTTP-only cookie
-    cookies.set(AUTH_SESSION_KEY, JSON.stringify(session), { httpOnly: true });
+    cookies.set(AUTH_SESSION_KEY, JSON.stringify(authentication), {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict"
+      }
+    );
   } catch (error) {
     console.error("Failed to set authentication:", error);
     throw error;
@@ -113,6 +121,12 @@ export const setAuthentication = async (tokens: Tokens): Promise<void> => {
  * @returns {Promise<boolean>} true if the user is authenticated, otherwise false.
  */
 export const isAuthenticated = async (): Promise<boolean> => {
-  const { accessToken, refreshToken, status } = await getAuthentication();
-  return (!isEmpty(accessToken)) && (!isEmpty(refreshToken)) && status === "connected";
+  Logger.debug("isAuthenticated() called");
+  // const { id } = await getAuthentication();
+  // const { accessToken, refreshToken } = await getTokens();
+  // const isAuth = (!isEmpty(id) && !isEmpty(accessToken) && !isEmpty(refreshToken));
+  // Logger.debug("returning", isAuth);
+  // return isAuth;
+
+  return false;
 };

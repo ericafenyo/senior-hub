@@ -1,10 +1,12 @@
 import { SectionHeader } from "@/components/section-header";
 import { Building } from "lucide-react";
 import { TeamsTable } from "@/components/teams-table";
-import {getMemberships} from "@/api/teams"
+import { getMemberships } from "@/api/teams";
 
 const TeamsPage = async () => {
   const memberships = await getMemberships();
+  console.log({ memberships });
+
   return (
     <>
       <SectionHeader title="My teams" icon={Building} />

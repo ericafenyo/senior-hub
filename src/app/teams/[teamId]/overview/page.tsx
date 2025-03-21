@@ -1,10 +1,12 @@
 import React from "react";
+import { Section } from "@/components/section";
+import { SectionHeader } from "@/components/section-header";
 
 const TeamOverviewPage = () => {
   return (
-    <div>
-      <h1>Team overview</h1>
-    </div>
+    <Section>
+      <SectionHeader title="Team overview" />
+    </Section>
   );
 };
 

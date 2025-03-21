@@ -30,7 +30,7 @@
   "id": "3a355e52-2dad-4e1f-a36f-41648ea707f0",
   "firstName": "Malik",
   "lastName": "N'Diaye",
-  "email": "malik.ndiaye@example.fr",
+  "email": "malik.ndiaye@yopmail.fr",
   "password": "2iQ90wkQwc3sxBNy",
   "birthDate": "1989-02-10",
   "photoUrl": null,

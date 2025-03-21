@@ -31,7 +31,7 @@
    "id": "fd3c230a-227c-4acc-ae5a-bdb178691e87",
   "firstName": "Charles",
   "lastName": "N'Diaye",
-  "email": "charles.ndiaye@example.fr",
+  "email": "charles.ndiaye@yopmail.fr",
   "password": "Jn4r8wV8d4ytunjX",
   "birthDate": "1959-04-20",
   "photoUrl": null,

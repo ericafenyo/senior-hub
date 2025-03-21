@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { TeamSideNavigation } from "@/components/team-side-navigation";
 import { Separator } from "@/components/ui/separator";
 import {
   Breadcrumb,
@@ -11,13 +10,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { AccountSideNavigation } from "@/components/account-side-navigation";
 
-const ProfileLayout = (
+const ProfileLayout =  async (
   props: { children: ReactNode }
 ) => {
   return (
     <div className="relative">
       <SidebarProvider>
-        <AccountSideNavigation />
+        <AccountSideNavigation/>
         <SidebarInset>
           <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />

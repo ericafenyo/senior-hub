@@ -26,7 +26,7 @@ export const ActionMenu = ({ membership }: { membership: Membership }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => redirect(`/teams/${membership.team.id}`)}>View</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => redirect(`/teams/${membership.team.id}?roleId=300d4273-e57c-11ef-8051-005056586ffc`)}>View</DropdownMenuItem>
         <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem> Delete</DropdownMenuItem>
       </DropdownMenuContent>

@@ -40,11 +40,10 @@ export const getAuthentication = async (): Promise<Authentication> => {
 };
 
 export const getAccessToken = async (): Promise<string> => {
-  Logger.debug("getAccessToken() called");
+  console.log("Calling get auth");
   const tokens = await getTokens();
   Logger.debug("tokens", tokens);
   return tokens.accessToken;
-  // return getTokens().then(tokens => tokens.accessToken);
 };
 
 export const getRefreshToken = async (): Promise<string> => {
@@ -52,24 +51,26 @@ export const getRefreshToken = async (): Promise<string> => {
 };
 
 export const getTokens = async (): Promise<Tokens> => {
-  Logger.debug("getTokens()");
-  const authentication = await getAuthentication();
-  console.log("authentication", authentication);
-  Logger.debug("authentication", authentication);
-  if (!authentication.id) {
-    throw new Error("No authentication session found.");
+    Logger.debug("getTokens()");
+    const authentication = await getAuthentication();
+    if (!authentication.id) {
+      Logger.warn("Invalid authentication session id");
+      return { accessToken: "", refreshToken: "" };
+
+    }
+
+    const jsonString = await sessions.retrieve(authentication.id) ?? JSON.stringify({});
+
+    const session: any = JSON.parse(jsonString);
+
+    console.log("session", session);
+
+    return {
+      accessToken: session.tokens?.accessToken ?? "",
+      refreshToken: session.tokens?.refreshToken ?? ""
+    };
   }
-
-  // const jsonString = await sessions.retrieve(authentication.id) ?? JSON.stringify({});
-
-
-  const session = JSON.parse("{}");
-
-  return {
-    accessToken: session.accessToken ?? "",
-    refreshToken: session.refreshToken ?? ""
-  };
-};
+;
 
 /**
  * Sets the authentication session using the provided tokens.
@@ -129,4 +130,16 @@ export const isAuthenticated = async (): Promise<boolean> => {
   // return isAuth;
 
   return false;
+};
+
+/**
+ * Clears the authentication session.
+ */
+export const clearAuthentication = async (): Promise<void> => {
+  const cookies = await getCookies();
+  const authentication = await getAuthentication();
+  if (authentication.id) {
+    await sessions.clear(authentication.id);
+    cookies.delete(AUTH_SESSION_KEY);
+  }
 };

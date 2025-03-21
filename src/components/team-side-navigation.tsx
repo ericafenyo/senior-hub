@@ -19,15 +19,27 @@ import {
   User,
   CircleCheckBig,
   Bell,
-  PackageOpen
+  PackageOpen, User2, ChevronUp
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+
+import { Accounts } from "@/services/accounts";
 
 type Props = {
   teamId: string;
+  permissions: string[];
 }
 
-const PatientInvitationMenu = ({ teamId }: { teamId: string }) => {
+const PatientInformationMenu = ({ teamId, permissions }: any) => {
+
+  console.log({contain: permissions.includes("read:patient-vitals")});
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Patient</SidebarGroupLabel>
@@ -41,14 +53,17 @@ const PatientInvitationMenu = ({ teamId }: { teamId: string }) => {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href={`/teams/${teamId}/vitals`}>
-                <SquareActivity />
-                <span>Vitals</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+
+          {permissions.includes("read:vitals") && (
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href={`/teams/${teamId}/vitals`}>
+                  <SquareActivity />
+                  <span>Vitals</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
@@ -127,7 +142,8 @@ const TeamMenu = ({ teamId }: { teamId: string }) => {
   );
 };
 
-export const TeamSideNavigation = ({ teamId }: Props) => {
+export const TeamSideNavigation = async ({ teamId, permissions }: any) => {
+  console.log(permissions);
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader className="bg-white border-b border-border h-16 flex items-center justify-center">
@@ -149,10 +165,31 @@ export const TeamSideNavigation = ({ teamId }: Props) => {
       </SidebarHeader>
       <SidebarContent className="bg-white">
         <TeamMenu teamId={teamId} />
-        <PatientInvitationMenu teamId={teamId} />
+        <PatientInformationMenu teamId={teamId} permissions={permissions} />
         <TeamSettingsMenu teamId={teamId} />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <User2 /> Account
+                  <ChevronUp className="ml-auto" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                className="w-[--radix-popper-anchor-width]"
+              >
+                <DropdownMenuItem onClick={Accounts.signOut}>
+                  <span>Sign out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 };

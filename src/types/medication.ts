@@ -1,7 +1,7 @@
 import { User } from "@/types/user";
 import { Team } from "@/types/team";
 
-export  type Medication = {
+export type Medication = {
   /**
    * The unique identifier for the medication.
    */

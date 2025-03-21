@@ -1,10 +1,9 @@
-import { capitalize } from "@/utilities";
-import { getRoles, addTeamMember } from "@/api";
-
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { TeamMemberTable } from "@/components/team-members-table";
+import { getRoles } from "@/api";
+import { getTeamMemberships } from "@/api/teams/get-team-memberships";
+import { SectionHeader } from "@/components/section-header";
+import { Section } from "@/components/section";
+import React from "react";
 
 type Props = {
   params: Promise<{
@@ -13,35 +12,14 @@ type Props = {
 }
 
 const MemberListPage = async (props: Props) => {
-  const params =  await props.params;
-  const roles = await getRoles();
+  const params = await props.params;
+  const members = await getTeamMemberships(params.teamId);
 
   return (
-    <div>
-      <div className="container">
-        <div className="w-80 mx-auto">
-          <h1>Members</h1>
-          Add a member
-          <form action={addTeamMember}>
-            <label htmlFor="email">Enter your email address</label>
-            <Input name="email" type="text" placeholder="Email Address" />
-            <Label htmlFor="role">Select a role for the team member</Label>
-            <Select name="role">
-              <SelectTrigger>
-                <SelectValue placeholder="Select a role" />
-              </SelectTrigger>
-              <SelectContent>
-                {
-                  roles.map(role => (<SelectItem value={role.name} key={role.id}>{capitalize(role.name)}</SelectItem>))
-                }
-              </SelectContent>
-            </Select>
-            <Input name="teamId" type="hidden" value={params.teamId} />
-            <Button>Add</Button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Section>
+      <SectionHeader title="Team members" />
+      <TeamMemberTable membership={members} />
+    </Section>
   );
 };
 

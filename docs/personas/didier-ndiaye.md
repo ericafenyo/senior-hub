@@ -29,7 +29,7 @@
   "id": "200e287f-6f5f-4a15-803f-bbb7beca1a6d",
   "firstName": "Didier",
   "lastName": "N'Diaye",
-  "email": "didier.ndiaye@example.fr",
+  "email": "didier.ndiaye@yopmail.fr",
   "password": "4u1oX0vAf4gPfLZ8",
   "birthDate": "1986-07-15",
   "photoUrl": null,

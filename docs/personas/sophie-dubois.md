@@ -35,7 +35,7 @@
   "id": "035ee431-5732-4915-a8be-427bb08acb41",
   "firstName": "Sophie",
   "lastName": "Dubois",
-  "email": "sophie.dubois@example.fr",
+  "email": "sophie.dubois@yopmail.fr",
   "password": "2w6PFYdhNAs0Nz7y",
   "birthDate": "1984-03-12",
   "photoUrl": null,

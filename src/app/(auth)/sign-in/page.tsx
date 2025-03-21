@@ -22,13 +22,13 @@ const SignIn = () => {
                 <div className="space-y-2 w-full">
                   <Label htmlFor="email">Email</Label>
                   <Input
-                    defaultValue="pierre.martin@example.fr"
+                    defaultValue="jean.dupont@yopmail.fr"
                     name="email"
                     autoComplete="off" placeholder="" />
                 </div>
                 <div className="space-y-2 w-full">
                   <Label htmlFor="password">Password</Label>
-                  <Input defaultValue="6uV6vc7hn307kblg" name="password" autoComplete="off" placeholder="" />
+                  <Input defaultValue="A1b2C3d4E5f6G7h8" name="password" autoComplete="off" placeholder="" />
                 </div>
 
                 <div>

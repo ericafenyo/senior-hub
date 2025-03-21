@@ -1,5 +1,4 @@
 import { getAccessToken } from "@/core/auth";
-import axios from "axios";
 
 /**
  * Represents an HTTP error.

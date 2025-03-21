@@ -1,6 +1,5 @@
 import { SectionHeader } from "@/components/section-header";
 import { CircleUser } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Profile } from "@/app/account/profile/profile";
 
 const Page = () => {

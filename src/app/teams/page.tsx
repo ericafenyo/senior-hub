@@ -5,9 +5,11 @@ import { getUserTeams } from "@/api/teams/get-user-teams";
 import { Button } from "@/components/ui/button";
 import { Plus, Building } from "lucide-react";
 import { SectionHeader } from "@/components/section-header";
+import { Team } from "@/types";
 
 const Teams = async () => {
   const teams = await getUserTeams();
+
   return (
     <section>
       <SectionHeader title="Teams" icon={Building} />
@@ -21,8 +23,8 @@ const Teams = async () => {
             </Button>
           </div>
           {
-            teams.map((team) => (
-              <Link className="flex space-x-4" key={team.id} href={`teams/${team.id}`}>
+            teams.map((team, index) => (
+              <Link className="flex space-x-4"  key={index} href={`teams/${team.id}`}>
                 <Avatar className="rounded-sm">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>

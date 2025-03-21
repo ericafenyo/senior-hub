@@ -1,3 +1,5 @@
+import { PartialUser } from "@/types/partial-user";
+
 export type Role = {
   /**
    * The unique identifier for the role.
@@ -49,14 +51,14 @@ export type Membership = {
   team: Team;
 
   /**
+   * The unique identifier of the member.
+   */
+  user: PartialUser;
+
+  /**
    * The role of the member in the team.
    */
   role: Role;
-
-  /**
-   * The permissions granted based on the role.
-   */
-  permissions: string[];
 
   /**
    * The status of the membership.

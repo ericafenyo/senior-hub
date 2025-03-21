@@ -29,7 +29,7 @@
  "id": "bb020b32-7d94-4075-b507-01c6fddb9688",
   "firstName": "Awa",
   "lastName": "N'Diaye",
-  "email": "awa.ndiaye@example.fr",
+  "email": "awa.ndiaye@yopmail.fr",
   "password": "3eB8c79pjKaF1LHs",
   "birthDate": "1962-11-05",
   "photoUrl": null,

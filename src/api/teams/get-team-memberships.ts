@@ -1,27 +1,23 @@
 "use server";
 
-import { getAccessToken } from "@/core/auth";
 import { Membership } from "@/types";
+import { getAccessToken } from "@/core/auth";
 import { buildUrl } from "@/api/utils";
 
-export const getMemberships = async (): Promise<Membership[]> => {
-  try {
-    const request = new Request(buildUrl("/users/6bb06d0b-b16b-4d63-904a-a2f8497e6d09/teams"), {
-      headers: {
-        Authorization: `Bearer ${await getAccessToken()}`
-      }
-    });
+/**
+ * Get a list of team memberships
+ *
+ * @param teamId The ID of the team
+ */
+export const getTeamMemberships = async (teamId: string): Promise<Membership[]> => {
+  const accessToken = await getAccessToken();
 
-    const r = await fetch(request);
-
-    console.log(r);
-    if (!r.ok) {
-      return [];
+  const request = new Request(buildUrl(`/teams/${teamId}/memberships`), {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
     }
+  });
 
-    return await r.json();
-  } catch (error) {
-    console.error("client", error);
-    return [];
-  }
+  const response = await fetch(request);
+  return response.json();
 };

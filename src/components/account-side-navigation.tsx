@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -6,25 +8,23 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarGroupContent,
-  SidebarGroup
+  SidebarGroup, SidebarHeader
 } from "@/components/ui/sidebar";
 
-import { Building, House,  Lock, Mail,  UserRound } from "lucide-react";
-
-type Props = {
-  teamId: string;
-}
+import { Building, House, Lock, Mail, UserRound } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Accounts } from "@/services/accounts";
 
 const items = [
-  {
-    href: "account/profile",
-    icon: UserRound,
-    title: "Profile"
-  },
   {
     href: "account/my-teams",
     icon: Building,
     title: "My teams"
+  },
+  {
+    href: "account/profile",
+    icon: UserRound,
+    title: "Profile"
   },
   {
     href: "account/email",
@@ -46,6 +46,7 @@ const items = [
 export const AccountSideNavigation = () => {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
+      <SidebarHeader />
       <SidebarContent className="bg-white">
         <SidebarGroup>
           <SidebarGroupContent>
@@ -64,7 +65,17 @@ export const AccountSideNavigation = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Button onClick={Accounts.signOut} variant="secondary" size="sm" className="w-full">
+                <span>Sign out</span>
+              </Button>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 };

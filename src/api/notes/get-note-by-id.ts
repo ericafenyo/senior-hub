@@ -1,9 +1,8 @@
 "use server";
 
 import { getAccessToken } from "@/core/auth";
-import { Note } from "@/types";
-import { LRUCache } from "lru-cache";
 import { z } from "zod";
+import { Note } from "@/types/note";
 
 type GetNoteByIdOptions = {
   teamId: string;

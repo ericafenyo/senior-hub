@@ -16,12 +16,10 @@ export const authenticate = async (formData: FormData) => {
 
   try {
     const tokens = await Accounts.authenticate(request);
-
-
     await setAuthentication(tokens);
   } catch (e) {
     console.error(e);
   }
 
-  redirect("/teams");
+  redirect("/account/my-teams");
 };

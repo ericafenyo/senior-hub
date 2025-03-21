@@ -13,19 +13,27 @@ import {
 
 import { TeamSideNavigation } from "@/components/team-side-navigation";
 import { Separator } from "@/components/ui/separator";
+import { fetchPermissions } from "@/api/roles/get-permissions";
+import { getMembership } from "@/api/membership/get-membership";
+import { Roles} from "@/services/roles";
+
+type Params = Promise<{ teamId: string }>
 
 type Props = {
   children: React.ReactNode;
-  params: {
-    teamId: string;
-  }
+  params: Params;
+  searchParams: URLSearchParams;
 };
 
-const TeamLayout = ({ children, params }: Props) => {
+const TeamLayout = async (props: Props) => {
+  const { teamId } = await props.params;
+  const membership = await getMembership(teamId);
+  const permissions = await Roles.getPermissions(membership.role.id);
+
   return (
     <div className="relative">
       <SidebarProvider>
-        <TeamSideNavigation teamId={params.teamId} />
+        <TeamSideNavigation teamId={teamId} permissions={permissions} />
         <SidebarInset>
           <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
@@ -45,7 +53,7 @@ const TeamLayout = ({ children, params }: Props) => {
             </Breadcrumb>
           </header>
           <div className="flex flex-1 flex-col bg-muted">
-            {children}
+            {props.children}
           </div>
         </SidebarInset>
       </SidebarProvider>

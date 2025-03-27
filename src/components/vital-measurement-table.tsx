@@ -14,6 +14,7 @@ import {
 import { DataTable } from "@/components/data-table";
 import { redirect } from "next/navigation";
 import { VitalMeasurement } from "@/types/vital-measurement";
+import dayjs from "dayjs";
 
 export const ActionMenu = ({ measurement }: { measurement: VitalMeasurement }) => {
   return (
@@ -45,7 +46,7 @@ export const columns: ColumnDef<VitalMeasurement>[] = [
   },
   {
     header: "Recorded at",
-    accessorKey: "recordedAt"
+    cell: ({ row }) => dayjs(row.original.recordedAt).format("dddd, MMMM D, YYYY HH:mm")
   }
 ];
 

@@ -16,6 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import { fetchPermissions } from "@/api/roles/get-permissions";
 import { getMembership } from "@/api/membership/get-membership";
 import { Roles} from "@/services/roles";
+import { Membership } from "@/types";
 
 type Params = Promise<{ teamId: string }>
 
@@ -27,8 +28,8 @@ type Props = {
 
 const TeamLayout = async (props: Props) => {
   const { teamId } = await props.params;
-  const membership = await getMembership(teamId);
-  const permissions = await Roles.getPermissions(membership.role.id);
+  const membership: Membership = await getMembership(teamId);
+  const permissions: string[] = await Roles.getPermissions(membership.role.id);
 
   return (
     <div className="relative">
@@ -39,17 +40,17 @@ const TeamLayout = async (props: Props) => {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
+              {/*<BreadcrumbList>*/}
+              {/*  <BreadcrumbItem className="hidden md:block">*/}
+              {/*    <BreadcrumbLink href="#">*/}
+              {/*      Building Your Application*/}
+              {/*    </BreadcrumbLink>*/}
+              {/*  </BreadcrumbItem>*/}
+              {/*  <BreadcrumbSeparator className="hidden md:block" />*/}
+              {/*  <BreadcrumbItem>*/}
+              {/*    <BreadcrumbPage>Data Fetching</BreadcrumbPage>*/}
+              {/*  </BreadcrumbItem>*/}
+              {/*</BreadcrumbList>*/}
             </Breadcrumb>
           </header>
           <div className="flex flex-1 flex-col bg-muted">

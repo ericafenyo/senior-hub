@@ -12,7 +12,7 @@ import Footer from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Senior hub",
+  title: "Care hub",
   description:
     "Senior Hub is a web application offering a dedicated platform for senior users to explore wellness tips, plan daily activities, and connect with a supportive community."
 };

@@ -42,7 +42,7 @@ const VitalsPage = () => {
     {
       "id": "e42b4fe3-9436-4562-ab37-6e4db3c3d3cf",
       "notes": "The patient is sweating heavily, with stomach ace.with stomach ace",
-      "recordedAt": "2025-02-08T22:08:25.659533",
+      "recordedAt": "2025-02-09T11:35:21.268345Z",
       "member": {
         "id": "3909e5f4-38d9-47b7-b9fc-0e534aa01739",
         "firstName": "Pierre",

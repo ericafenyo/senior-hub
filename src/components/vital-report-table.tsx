@@ -18,6 +18,7 @@ import { redirect } from "next/navigation";
 import { PartialVitalReport } from "@/types/partial-vital-report";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { CreateVitalReport } from "@/components/create-vital-report";
+import dayjs from "dayjs";
 
 export const ActionMenu = ({ report }: { report: PartialVitalReport }) => {
   return (
@@ -39,11 +40,11 @@ export const ActionMenu = ({ report }: { report: PartialVitalReport }) => {
 export const columns: ColumnDef<PartialVitalReport>[] = [
   {
     header: "Date",
-    accessorKey: "recordedAt"
+    cell: ({ row }) => dayjs(row.original.recordedAt).format("MMMM D, YYYY")
   },
   {
     header: "Time",
-    accessorKey: "time"
+    cell: ({ row }) => dayjs(row.original.recordedAt).format("HH:mm")
   },
   {
     header: "By",
@@ -51,7 +52,7 @@ export const columns: ColumnDef<PartialVitalReport>[] = [
   },
   {
     header: "No. of vitals",
-    accessorKey: "vitalsCount"
+    cell: ({ row }) => row.original.vitalCount
   },
   {
     id: "actions",
